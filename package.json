@@ -8,12 +8,35 @@
     "test": "npm run lint & npm run test-only",
     "test-cov": "nyc npm run test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koajs/is-json.git"
+  },
+  "keywords": [
+    "json",
+    "is-json",
+    "koa"
+  ],
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
     "url": "http://jongleberry.com",
     "twitter": "https://twitter.com/jongleberry"
   },
+  "contributors": [
+    {
+      "name": "Haoxin",
+      "email": "haoxinst@gmail.com",
+      "url": "https://medium.com/@haoxin",
+      "twitter": "https://twitter.com/haoxins"
+    },
+    {
+      "name": "Imed Jaberi",
+      "email": "imed_jebari@hotmail.fr",
+      "url": "https://github.com/3imed-jaberi",
+      "twitter": "https://twitter.com/3imed_jaberi"
+    }
+  ],
   "license": "MIT",
   "nyc": {
     "reporter": [
@@ -32,5 +55,11 @@
     "mocha": "^7.0.1",
     "nyc": "^15.0.0"
   },
-  "repository": "koajs/is-json"
+  "engines": {
+    "node": ">= 8"
+  },
+  "bugs": {
+    "url": "https://github.com/koajs/is-json/issues"
+  },
+  "homepage": "https://github.com/koajs/is-json#readme"
 }
