@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint --fix .",
-    "test": "mocha"
+    "test-only": "mocha",
+    "test": "npm run lint & npm run test-only",
+    "test-cov": "nyc npm run test"
   },
   "author": {
     "name": "Jonathan Ong",
@@ -13,6 +15,13 @@
     "twitter": "https://twitter.com/jongleberry"
   },
   "license": "MIT",
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "./coverage"
+  },
   "devDependencies": {
     "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",
@@ -20,7 +29,8 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^7.0.1"
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0"
   },
   "repository": "koajs/is-json"
 }
