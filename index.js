@@ -4,7 +4,7 @@
  *
  */
 
-module.exports = function (body) {
+module.exports = function isJSON (body) {
   return !(
     !body ||
     typeof body === 'string' ||
