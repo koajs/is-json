@@ -24,11 +24,16 @@ describe('koa-is-json test', () => {
     assert.ok(!isJSON(body))
   })
 
-  it('Condition 4: check null', () => {
+  it('Condition 4: Buffer.isBuffer(body)', () => {
+    body = Buffer.alloc(5)
+    assert.ok(!isJSON(body))
+  })
+
+  it('Condition 5: check null', () => {
     assert.ok(!isJSON(null))
   })
 
-  it('Condition 5: check correct body', () => {
+  it('Condition 6: check correct body', () => {
     body = JSON.parse(JSON.stringify({ msg: 'hello world !' }))
     assert.ok(isJSON(body))
   })
