@@ -1,13 +1,65 @@
 {
   "name": "koa-is-json",
-  "description": "check if a koa body should be interpreted as JSON",
+  "description": "Check if a koa body should be interpreted as JSON",
   "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint --fix .",
+    "test-only": "mocha",
+    "test": "npm run lint & npm run test-only",
+    "test-cov": "nyc npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koajs/is-json.git"
+  },
+  "keywords": [
+    "json",
+    "is-json",
+    "koa"
+  ],
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
     "url": "http://jongleberry.com",
     "twitter": "https://twitter.com/jongleberry"
   },
+  "contributors": [
+    {
+      "name": "Haoxin",
+      "email": "haoxinst@gmail.com",
+      "url": "https://medium.com/@haoxin",
+      "twitter": "https://twitter.com/haoxins"
+    },
+    {
+      "name": "Imed Jaberi",
+      "email": "imed_jebari@hotmail.fr",
+      "url": "https://github.com/3imed-jaberi",
+      "twitter": "https://twitter.com/3imed_jaberi"
+    }
+  ],
   "license": "MIT",
-  "repository": "koajs/is-json"
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "./coverage"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "bugs": {
+    "url": "https://github.com/koajs/is-json/issues"
+  },
+  "homepage": "https://github.com/koajs/is-json#readme"
 }
