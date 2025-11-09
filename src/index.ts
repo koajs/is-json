@@ -3,8 +3,7 @@
  * Check if `body` should be interpreted as json.
  *
  */
-
-module.exports = function isJSON (body) {
+export const isJSON = (body?: any): boolean => {
   return !(
     !body ||
     typeof body === 'string' ||
@@ -12,3 +11,5 @@ module.exports = function isJSON (body) {
     Buffer.isBuffer(body)
   )
 }
+
+export default isJSON;

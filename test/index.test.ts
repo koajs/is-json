@@ -1,6 +1,7 @@
+import assert from 'node:assert';
+import { describe, it } from 'node:test';
 
-const assert = require('assert')
-const isJSON = require('..')
+import isJSON from '../src';
 
 describe('koa-is-json test', () => {
   let body
