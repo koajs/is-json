@@ -1,22 +1,39 @@
 {
-  "name": "koa-is-json",
-  "description": "Check if a koa body should be interpreted as JSON",
+  "name": "@koa/is-json",
   "version": "1.0.0",
-  "scripts": {
-    "lint": "eslint --fix .",
-    "test-only": "mocha",
-    "test": "npm run lint & npm run test-only",
-    "test-cov": "nyc npm run test"
+  "description": "Check if a koa body should be interpreted as JSON",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/koajs/is-json.git"
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsup",
+    "test": "node  --require ts-node/register --test",
+    "test-ci": "npm run test -- --experimental-test-coverage",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
+    "koa",
+    "utils",
+    "helpers",
     "json",
-    "is-json",
-    "koa"
+    "is-json"
   ],
+  "license": "MIT",
+  "peerDependencies": {
+    "koa": ">= 2"
+  },
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
@@ -37,26 +54,19 @@
       "twitter": "https://twitter.com/3imed_jaberi"
     }
   ],
-  "license": "MIT",
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "report-dir": "./coverage"
-  },
   "devDependencies": {
-    "eslint": "^8.19.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "mocha": "^10.0.0",
-    "nyc": "^15.0.0"
+    "@types/node": "^24.10.0",
+    "rimraf": "^6.1.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koajs/is-json.git"
   },
   "bugs": {
     "url": "https://github.com/koajs/is-json/issues"
