@@ -6,9 +6,10 @@
 
 module.exports = function isJSON (body) {
   return !(
-    !body ||
+    body === undefined ||
+    body === null ||
     typeof body === 'string' ||
-    typeof body.pipe === 'function' ||
+    (body && typeof body.pipe === 'function') ||
     Buffer.isBuffer(body)
   )
 }

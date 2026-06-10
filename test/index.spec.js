@@ -5,7 +5,7 @@ const isJSON = require('..')
 describe('koa-is-json test', () => {
   let body
 
-  it('Condition 1: !body', () => {
+  it('Condition 1: undefined body', () => {
     assert.ok(!isJSON())
   })
 
@@ -33,7 +33,15 @@ describe('koa-is-json test', () => {
     assert.ok(!isJSON(null))
   })
 
-  it('Condition 6: check correct body', () => {
+  it('Condition 6: check false boolean', () => {
+    assert.ok(isJSON(false))
+  })
+
+  it('Condition 7: check zero number', () => {
+    assert.ok(isJSON(0))
+  })
+
+  it('Condition 8: check correct body', () => {
     body = JSON.parse(JSON.stringify({ msg: 'hello world !' }))
     assert.ok(isJSON(body))
   })
