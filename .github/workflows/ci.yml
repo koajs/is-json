@@ -4,20 +4,39 @@ on:
   - push
   - pull_request
 
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 20
-          - 22
-          - 24
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v7
+      - name: Use Node.js 26
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          package-manager-cache: false
+      - name: Use latest npm
+        run: npm install --global npm@latest
       - name: Install dependencies
-        run: yarn install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Lint
+        run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
+      - name: Type check
+        run: npm run typecheck
+      - name: Type check package exports
+        run: npm run typecheck:package
       - name: Run tests
-        run: yarn test-ci
+        run: npm run test-ci
+      - name: Upload built package
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
