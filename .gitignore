@@ -10,7 +10,6 @@ temp/
 #     Node.js     #
 ###################
 node_modules
-package-lock.json
 yarn.lock
 npm-debug.log
 yarn-debug.log
@@ -25,4 +24,7 @@ build
 ###################
 coverage
 *.lcov
+lcov.info
 .nyc_output
+.codex
+.claude

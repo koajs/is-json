@@ -2,38 +2,18 @@
   "name": "@koa/is-json",
   "version": "1.0.0",
   "description": "Check if a koa body should be interpreted as JSON",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
-  ],
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsup",
-    "test": "node  --require ts-node/register --test",
-    "test-ci": "npm run test -- --experimental-test-coverage",
-    "prepublishOnly": "npm run build"
-  },
   "keywords": [
-    "koa",
-    "utils",
     "helpers",
+    "is-json",
     "json",
-    "is-json"
+    "koa",
+    "utils"
   ],
-  "license": "MIT",
-  "peerDependencies": {
-    "koa": ">= 2"
+  "homepage": "https://github.com/koajs/is-json#readme",
+  "bugs": {
+    "url": "https://github.com/koajs/is-json/issues"
   },
+  "license": "MIT",
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
@@ -54,22 +34,72 @@
       "twitter": "https://twitter.com/3imed_jaberi"
     }
   ],
-  "devDependencies": {
-    "@types/node": "^24.10.0",
-    "rimraf": "^6.1.0",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": ">= 20"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/koajs/is-json.git"
   },
-  "bugs": {
-    "url": "https://github.com/koajs/is-json/issues"
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
   },
-  "homepage": "https://github.com/koajs/is-json#readme"
+  "scripts": {
+    "prepare": "simple-git-hooks",
+    "lint": "oxlint --type-aware",
+    "lint:fix": "oxlint --type-aware --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "prebuild": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "tsc --ignoreConfig --target esnext --skipLibCheck --types node --strict --erasableSyntaxOnly --verbatimModuleSyntax --noEmitOnError --rootDir ./src --module esnext --moduleResolution bundler --declaration --outDir ./dist ./src/index.ts && tsc --ignoreConfig --target esnext --skipLibCheck --types node --strict --erasableSyntaxOnly --noEmitOnError --rootDir ./src --module commonjs --outDir ./dist/cjs ./src/index.ts && node -e \"const fs=require('node:fs');fs.renameSync('dist/cjs/index.js','dist/index.cjs');fs.rmSync('dist/cjs',{recursive:true});fs.copyFileSync('dist/index.d.ts','dist/index.d.cts')\"",
+    "typecheck": "tsc --project tsconfig.json",
+    "typecheck:package": "tsc --ignoreConfig --module node16 --moduleResolution node16 --skipLibCheck --types node --strict --noEmit test/exports.test.ts",
+    "pretest": "npm run build",
+    "test": "node --test",
+    "test-ci": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=lcov.info",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "oxfmt": "^0.67.0",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2003",
+    "simple-git-hooks": "^2.14.0",
+    "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "koa": ">= 2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run lint"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "26.x",
+      "onFail": "error"
+    }
+  },
+  "engines": {
+    "node": ">= 20"
+  }
 }
